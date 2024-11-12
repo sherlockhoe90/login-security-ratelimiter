@@ -4,7 +4,7 @@
 
 ### Task: Implement Login Functionality with Rate Limiting in Spring Boot
 
-**Objective**: Design a secure login system in Spring Boot using Spring Security, with a rate-limiting mechanism to
+**Objective**: Design a secure login system in Spring Boot using Spring Security and Redis, with a rate-limiting mechanism to
 _prevent brute-force_ attacks, as well as _DDOS_ attacks.
 
 1. Login Functionality:

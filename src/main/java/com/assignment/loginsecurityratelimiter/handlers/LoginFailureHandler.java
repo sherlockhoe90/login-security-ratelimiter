@@ -19,7 +19,7 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
     private final LoginAttemptService loginAttemptService;
 
     @Override
-    public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
+    public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException {
         String username = request.getParameter("username");
         String ip = request.getRemoteAddr();
 

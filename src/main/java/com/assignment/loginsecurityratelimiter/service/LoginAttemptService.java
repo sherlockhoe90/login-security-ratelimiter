@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
@@ -68,7 +67,7 @@ public class LoginAttemptService {
                 redisTemplate.opsForValue().increment(failedAttemptsKey, 1);
                 logger.warn("Login failed for user {} from IP {}. Failed attempts : {}.", username, ipAddress, redisTemplate.opsForValue().get(failedAttemptsKey));
             } else {
-                // Set block time in Redis when maximum attempts are exceeded
+                //put a block time in place, when the maximum-attempt threshold is reached
                 String blockedUserKey = BLOCKED_USER_PREFIX + username + ":" + ipAddress;
                 redisTemplate.opsForValue().set(blockedUserKey, LocalDateTime.now().toString(), cooldownPeriod, TimeUnit.MINUTES);
                 logger.error("User {} from IP {} is blocked for {} minute(s) due to too many failed attempts", username, ipAddress, cooldownPeriod);

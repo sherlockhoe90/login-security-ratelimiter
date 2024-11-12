@@ -23,13 +23,13 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                         org.springframework.security.core.Authentication authentication)
-            throws IOException, ServletException {
+            throws IOException {
 
         String username = request.getParameter("username");
         String ip = request.getRemoteAddr();
 
         loginAttemptService.resetAttempts(username, ip);
         logger.info("User {} from IP {} logged in successfully.", username, ip);
-        response.sendRedirect("/api/v1.0/auth/home"); // Redirect to a protected resource after successful login
+        response.sendRedirect("/api/v1.0/auth/home"); // redirect towards a protected endpoint/resource after a successful login
     }
 }

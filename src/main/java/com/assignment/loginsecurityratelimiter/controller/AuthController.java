@@ -48,7 +48,7 @@ public class AuthController {
             // reset the login attempt counter upon a successful login
             loginAttemptService.resetAttempts(username, ipAddress);
             logger.info("Successful login for user {} from IP {}. Attempt counts reset.", username, ipAddress);
-            return ResponseEntity.ok("Login successful");
+            return ResponseEntity.ok("Login successful.");
 
         } catch (Exception e) {
             // if authentication fails, record the failed attempt and handle rate-limiting

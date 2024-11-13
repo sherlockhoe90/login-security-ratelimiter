@@ -3,7 +3,9 @@ package com.assignment.loginsecurityratelimiter.handlers;
 import com.assignment.loginsecurityratelimiter.service.LoginAttemptService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
 
@@ -19,7 +21,9 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
 
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException {
-        String username = request.getParameter("username");
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        String username = authentication != null ? authentication.getName() : null;
         String ip = request.getRemoteAddr();
 
         if (loginAttemptService.isBlocked(username, ip)) {

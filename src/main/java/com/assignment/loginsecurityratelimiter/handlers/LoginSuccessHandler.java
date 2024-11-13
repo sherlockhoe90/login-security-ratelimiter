@@ -5,6 +5,8 @@ import com.assignment.loginsecurityratelimiter.service.LoginAttemptService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
@@ -24,7 +26,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
                                         org.springframework.security.core.Authentication authentication)
             throws IOException {
 
-        String username = request.getParameter("username");
+        String username = authentication != null ? authentication.getName() : null;
         String ip = request.getRemoteAddr();
 
         loginAttemptService.resetAttempts(username, ip);

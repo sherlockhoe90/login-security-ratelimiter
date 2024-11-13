@@ -44,3 +44,12 @@ _prevent brute-force_ attacks, as well as _DDOS_ attacks.
 * Source code for the Spring Boot application with appropriate configuration files.
 * Documentation or comments within the code explaining each major part.
 * Test cases verifying the expected functionality.
+
+## Curl for Postman-testing
+> **_CURL_** :\
+curl --location 'http://localhost:8080/api/v1.0/auth/login' \
+--header 'Content-Type: application/json' \
+--data '{
+"username":"user",
+"password":"password"
+}'
